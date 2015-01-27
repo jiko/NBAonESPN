@@ -2,7 +2,7 @@
 
 from bs4 import BeautifulSoup as bs
 from icalendar import Calendar, Event
-from datetime import datetime
+from datetime import datetime, timedelta
 import pytz
 import os
 
@@ -38,15 +38,15 @@ for game in games:
 
             time_pm_tz = g[2].text.split()[0]
             split_t = time_pm_tz.split(":")
-            # assuming all games in PM
+            # assuming all games begin in the afternoon
             hour = int(split_t[0])
+            if hour < 12: hour += 12
             minute = int(split_t[1])
 
-            end_t_h = hour + 2
-            end_t_m = minute + 15
+            duration = timedelta(minutes=15,hours=2)
 
             start_time = datetime(2015,month,day,hour,minute,0)
-            end_time = start_time.replace(hour=end_t_h, minute=end_t_m)
+            end_time = start_time + duration
 
             event = Event()
             event.add('summary', g[1].text)
@@ -55,5 +55,6 @@ for game in games:
             event.add('dtstamp', timezone.localize(datetime.now()))
             cal.add_component(event)
 
+#print(display_cal(cal))
 with open('nba_on_espn.ics', 'wb') as f:
     f.write(cal.to_ical())
