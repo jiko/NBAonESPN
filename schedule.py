@@ -7,8 +7,7 @@ nba_tv_sched = bs(open("espn.go.com-nba-television.html"))
 schedule_table = nba_tv_sched.select("div#my-teams-table table")
 schedule = bs(str(schedule_table))
 table_rows = schedule.find_all('tr')
-rows = [str(game) for game in table_rows]
-games = [bs(game) for game in rows]
+games = [bs(str(game)) for game in table_rows]
 for game in games:
     g = game.select('td')
     if len(g) == 4:
