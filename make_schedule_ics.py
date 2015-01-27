@@ -1,0 +1,59 @@
+#!/usr/bin/env python
+
+from bs4 import BeautifulSoup as bs
+from icalendar import Calendar, Event
+from datetime import datetime
+import pytz
+import os
+
+months = {
+        "JANUARY" : "1",
+        "FEBRUARY": "2",
+        "MARCH"   : "3",
+        "APRIL"   : "4"
+        }
+cal = Calendar()
+cal.add('prodid', '-//NBA on ESPN//espn.go.com/nba/television//')
+cal.add('version', '2.0')
+timezone = pytz.timezone("US/Eastern")
+def display_cal(cal):
+    return cal.to_ical().replace('\r\n', '\n').strip()
+
+# download of http://espn.go.com/nba/television
+nba_tv_sched = bs(open("espn.go.com-nba-television.html"))
+schedule_table = nba_tv_sched.select("div#my-teams-table table")
+schedule = bs(str(schedule_table))
+table_rows = schedule.find_all('tr')
+rows = [str(game) for game in table_rows]
+games = [bs(game) for game in rows]
+for game in games:
+    g = game.select('td')
+    if len(g) == 4:
+        if g[0].text in ["JANUARY","FEBRUARY","MARCH","APRIL"]:
+            month = int(months[g[0].text])
+            continue
+        else:
+            # need much better date handling
+            day = int(g[0].text.split()[1])
+
+            time_pm_tz = g[2].text.split()[0]
+            split_t = time_pm_tz.split(":")
+            # assuming all games in PM
+            hour = int(split_t[0])
+            minute = int(split_t[1])
+
+            end_t_h = hour + 2
+            end_t_m = minute + 15
+
+            start_time = datetime(2015,month,day,hour,minute,0)
+            end_time = start_time.replace(hour=end_t_h, minute=end_t_m)
+
+            event = Event()
+            event.add('summary', g[1].text)
+            event.add('dtstart', timezone.localize(start_time))
+            event.add('dtend', timezone.localize(end_time))
+            event.add('dtstamp', timezone.localize(datetime.now()))
+            cal.add_component(event)
+
+with open('nba_on_espn.ics', 'wb') as f:
+    f.write(cal.to_ical())
