@@ -24,8 +24,7 @@ nba_tv_sched = bs(open("espn.go.com-nba-television.html"))
 schedule_table = nba_tv_sched.select("div#my-teams-table table")
 schedule = bs(str(schedule_table))
 table_rows = schedule.find_all('tr')
-rows = [str(game) for game in table_rows]
-games = [bs(game) for game in rows]
+games = [bs(str(game)) for game in table_rows]
 for game in games:
     g = game.select('td')
     if len(g) == 4:
@@ -33,13 +32,12 @@ for game in games:
             month = int(months[g[0].text])
             continue
         else:
-            # need much better date handling
             day = int(g[0].text.split()[1])
 
-            time_pm_tz = g[2].text.split()[0]
-            split_t = time_pm_tz.split(":")
-            # assuming all games begin in the afternoon
+            time_pm_tz = g[2].text.split()
+            split_t = time_pm_tz[0].split(":")
             hour = int(split_t[0])
+            # assuming all games begin after noon
             if hour < 12: hour += 12
             minute = int(split_t[1])
 
