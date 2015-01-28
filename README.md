@@ -11,6 +11,6 @@ This script does not
 - Note what network the game is on
 - Watch the NBA for you
 - Link to Watch ESPN online
-- Make a calendar file including anything other than team match-ups and times
+- Include anything other than team match-ups and times
 - Include the full NBA schedule
 - Feed your cat
