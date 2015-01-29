@@ -41,7 +41,7 @@ for game in games:
             if hour < 12: hour += 12
             minute = int(split_t[1])
 
-            duration = timedelta(minutes=15,hours=2)
+            duration = timedelta(minutes=30,hours=2)
 
             start_time = datetime(2015,month,day,hour,minute,0)
             end_time = start_time + duration
