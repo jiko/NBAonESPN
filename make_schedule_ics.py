@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from bs4 import BeautifulSoup as bs
-from icalendar import Calendar, Event
+from icalendar import Calendar, Event, vText
 from datetime import datetime, timedelta
 import pytz
 import os
@@ -46,11 +46,16 @@ for game in games:
             start_time = datetime(2015,month,day,hour,minute,0)
             end_time = start_time + duration
 
+            network = g[3].img['alt']
+
             event = Event()
             event.add('summary', g[1].text)
             event.add('dtstart', timezone.localize(start_time))
             event.add('dtend', timezone.localize(end_time))
             event.add('dtstamp', timezone.localize(datetime.now()))
+            event['location'] = vText(network)
+            if network == "ESPN":
+                event['url'] = g[3].a['href']
             cal.add_component(event)
 
 #print(display_cal(cal))
