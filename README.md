@@ -9,7 +9,7 @@ I also made a script to make an [NBA on TNT iCalendar file](http://fortheloveofb
 These scripts do not
 
 - Download a copy of the schedule webpages
-- Auto-update the filse hosted here or on my server
+- Auto-update the files hosted here or on my server
 - Include the full NBA schedule
 - Feed your cat
 
