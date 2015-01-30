@@ -10,3 +10,5 @@ This script does not
 - Auto-update the file hosted here or on my server
 - Include the full NBA schedule
 - Feed your cat
+
+I also made an [NBA on TNT calendar](http://fortheloveofbasketball.com/nba_on_tnt.ics), based on [the NBA on TNT webpage](http://www.nba.com/nbaontnt/).
