@@ -7,9 +7,7 @@ import pytz
 import os
 
 # throw out everything before February
-months = {"Feb": 2,
-          "Mar": 3,
-          "Apr": 4}
+months = {"Apr": 4, "May": 5}
 cal = Calendar()
 cal.add('prodid', '-//NBA on TNT//http://www.nba.com/nbaontnt///')
 cal.add('version', '2.0')
@@ -43,8 +41,8 @@ def make_event(game, month, day):
 # download of http://www.nba.com/nbaontnt/
 url = "http://www.nba.com/tntovertime/"
 network = "TNT"
-nba_tv_sched = bs(open("nbaontnt.html"))
-schedule_table = nba_tv_sched(id="nbaTNTsched")
+nba_tv_sched = bs(open("nbaontnt-playoffs.html"))
+schedule_table = nba_tv_sched("tbody")
 schedule = bs(str(schedule_table))
 table_rows = schedule('tr')
 games = [bs(str(game)) for game in table_rows]
@@ -55,9 +53,9 @@ for game in games:
     if month_day[0] in months.keys():
         month = months[month_day[0]]
         day = int(month_day[1])
-        cal.add_component(make_event(g[1], month, day))
-        if g[2].text:
-            cal.add_component(make_event(g[2], month, day))
+        for i in range(1,4):
+            if g[i].text:
+                cal.add_component(make_event(g[i], month, day))
 
 
 #print(display_cal(cal))
