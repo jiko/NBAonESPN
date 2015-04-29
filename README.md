@@ -13,3 +13,6 @@ These scripts do not
 - Include the full NBA schedule
 - Feed your cat
 
+To install dependencies:
+
+`pip install sanetime requests`
