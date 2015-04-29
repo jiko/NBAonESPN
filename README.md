@@ -15,4 +15,4 @@ These scripts do not
 
 To install dependencies:
 
-`pip install sanetime requests`
+`pip install requests sanetime icalendar`
