@@ -39,4 +39,4 @@ for game in table_rows:
 
 #print(display_cal(cal))
 with open('nba_on_espn.ics', 'wb') as f:
-    f.write(cal.to_ical())
+    f.write(display_cal(cal))

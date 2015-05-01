@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-import requests
-import json
+from requests import get
+from json import loads
 from sanetime import time, delta
 from icalendar import Calendar, Event, vText
 
@@ -14,9 +14,9 @@ def display_cal(cal):
 
 network = "TNT"
 url = "http://data.nba.com/jsonp/5s/json/cms/2014/tntot/games.json?callback=NBAONTNTschedule"
-r = requests.get(url)
+r = get(url)
 text = r.text.rstrip("();").replace("NBAONTNTschedule(","")
-nba_tv_sched = json.loads(text)
+nba_tv_sched = loads(text)
 games = nba_tv_sched['sports_content']['games']
 
 for game in games:
@@ -37,4 +37,4 @@ for game in games:
 
 #print(display_cal(cal))
 with open('nba_on_tnt.ics', 'wb') as f:
-    f.write(cal.to_ical().replace('\r\n', '\n'))
+    f.write(display_cal(cal))
