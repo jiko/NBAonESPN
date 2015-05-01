@@ -23,18 +23,15 @@ for game in table_rows:
         duration = delta(minutes=30,hours=2)
         end_time = start_time + duration
 
-        network = g[3].img['alt']
-
         event = Event()
         event.add('summary', g[1].text)
         event.add('dtstart', start_time.datetime)
         event.add('dtend', end_time.datetime)
         event.add('dtstamp', time().datetime)
+        network = g[3].img['alt']
         event['location'] = vText(network)
-
         if "ESPN" in network:
             event['url'] = g[3].a['href']
-
         cal.add_component(event)
 
 #print(display_cal(cal))
