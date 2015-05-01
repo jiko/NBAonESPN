@@ -8,7 +8,6 @@ from icalendar import Calendar, Event, vText
 cal = Calendar()
 cal.add('prodid', '-//NBA on TNT//http://www.nba.com/nbaontnt///')
 cal.add('version', '2.0')
-
 def display_cal(cal):
     return cal.to_ical().replace('\r\n', '\n').strip()
 
