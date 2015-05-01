@@ -6,13 +6,8 @@ So, this script takes [the NBA on ESPN schedule](http://espn.go.com/nba/televisi
 
 I also made a script to make an [NBA on TNT iCalendar file](http://fortheloveofbasketball.com/nba_on_tnt.ics), based on [the NBA on TNT webpage](http://www.nba.com/nbaontnt/).
 
-These scripts do not
-
-- Download a copy of the schedule webpages
-- Auto-update the files hosted here or on my server
-- Include the full NBA schedule
-- Feed your cat
+These scripts do not include the full NBA schedule. However, they now run daily on my server, so the iCalendar files should stay up to date for the playoffs. I have noticed that some of the listings for 'if needed' games have strange timestamps, so keep that in mind.
 
 To install dependencies:
 
-`pip install requests sanetime icalendar`
+`pip install requests sanetime icalendar beautifulsoup4`
