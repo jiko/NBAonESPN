@@ -33,6 +33,4 @@ for game in games:
         event['url'] = "http://www.nba.com/tntovertime/"
     cal.add_component(event)
 
-#print(display_cal(cal))
-with open('/var/www/ftlob/nba_on_tnt.ics', 'wb') as f:
-    f.write(display_cal(cal))
+print(display_cal(cal))

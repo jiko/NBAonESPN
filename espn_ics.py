@@ -34,6 +34,4 @@ for game in table_rows:
             event['url'] = g[3].a['href']
         cal.add_component(event)
 
-#print(display_cal(cal))
-with open('/var/www/ftlob/nba_on_espn.ics', 'wb') as f:
-    f.write(display_cal(cal))
+print(display_cal(cal))
