@@ -17,7 +17,6 @@ r = get(url)
 text = r.text.rstrip("();").replace("NBAONTNTschedule(","")
 nba_tv_sched = loads(text)
 games = nba_tv_sched['sports_content']['games']
-
 for game in games:
     begins = game['gameDateTime'].replace(" ET","")
     duration = delta(minutes=30,hours=2)
@@ -35,5 +34,5 @@ for game in games:
     cal.add_component(event)
 
 #print(display_cal(cal))
-with open('nba_on_tnt.ics', 'wb') as f:
+with open('/var/www/ftlob/nba_on_tnt.ics', 'wb') as f:
     f.write(display_cal(cal))

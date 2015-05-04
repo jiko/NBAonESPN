@@ -35,5 +35,5 @@ for game in table_rows:
         cal.add_component(event)
 
 #print(display_cal(cal))
-with open('nba_on_espn.ics', 'wb') as f:
+with open('/var/www/ftlob/nba_on_espn.ics', 'wb') as f:
     f.write(display_cal(cal))
